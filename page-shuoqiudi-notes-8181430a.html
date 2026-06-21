@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>说球帝 · 资料整理与信息索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f7fbfc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1d2f3a;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      flex: 1;
+    }
+
+    /* Hero / 首页横幅 */
+    .hero {
+      background: linear-gradient(125deg, #d0ece8 0%, #b5dfda 70%);
+      border-radius: 2.5rem 2.5rem 2.5rem 0;
+      padding: 3rem 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 20px rgba(20, 120, 110, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(60, 160, 140, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #0c3e3a;
+      margin-bottom: 0.8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .sub {
+      font-size: 1.15rem;
+      color: #1d5a54;
+      max-width: 36rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0.85;
+    }
+
+    .hero .sub strong {
+      color: #0b4b44;
+      font-weight: 600;
+    }
+
+    /* 背景说明卡片 */
+    .bg-note {
+      background: #e6f3f0;
+      border-left: 6px solid #2b9b8b;
+      border-radius: 1rem;
+      padding: 1.6rem 2rem;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .bg-note p {
+      font-size: 1rem;
+      color: #1b4340;
+    }
+
+    .bg-note .accent {
+      color: #147a6c;
+      font-weight: 500;
+    }
+
+    /* 网格卡片 */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+      margin: 2.5rem 0 3rem;
+    }
+
+    @media (min-width: 680px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1.8rem 1.8rem 1.8rem 0.6rem;
+      padding: 1.8rem 1.6rem 2rem;
+      box-shadow: 0 4px 12px rgba(30, 90, 80, 0.05);
+      transition: box-shadow 0.2s, transform 0.2s;
+      border: 1px solid #e0f0ec;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 28px rgba(20, 120, 100, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #0f4f48;
+      margin-bottom: 0.75rem;
+      border-bottom: 2px solid #c4e3dd;
+      padding-bottom: 0.3rem;
+      display: inline-block;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #2f4a46;
+    }
+
+    .card .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      background: #d4ede7;
+      color: #0c5c51;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      margin-top: 0.8rem;
+    }
+
+    /* 自然介绍段落 (三段内容) */
+    .story {
+      background: #ffffff;
+      border-radius: 2rem;
+      padding: 2rem 2rem 2.2rem;
+      margin: 2.2rem 0;
+      box-shadow: 0 2px 12px rgba(20, 80, 70, 0.03);
+    }
+
+    .story h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #11524b;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .story p {
+      margin-bottom: 1.2rem;
+      color: #26433f;
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story .highlight {
+      background: #e9f6f2;
+      padding: 0 0.4rem;
+      border-radius: 6px;
+      color: #11665a;
+    }
+
+    .story a {
+      color: #147a6c;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: #a5cfc6;
+      font-weight: 500;
+    }
+
+    .story a:hover {
+      text-decoration-color: #147a6c;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      background: #eef8f5;
+      border-radius: 2rem;
+      padding: 1.8rem 2rem;
+      margin: 2.5rem 0 2rem;
+    }
+
+    .faq-mini h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #0d524a;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-mini .q-item {
+      margin-bottom: 0.6rem;
+      padding-left: 0.4rem;
+    }
+
+    .faq-mini .q-item strong {
+      color: #1b6b60;
+      font-weight: 500;
+    }
+
+    .faq-mini .q-item span {
+      color: #2a5951;
+    }
+
+    /* 页尾访问提示 */
+    .footer-note {
+      border-top: 1px solid #d0e7e2;
+      padding-top: 1.8rem;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-note p {
+      font-size: 0.95rem;
+      color: #2f5f59;
+      max-width: 34rem;
+      margin: 0 auto 0.3rem;
+    }
+
+    .footer-note .link-wrap {
+      margin-top: 0.6rem;
+    }
+
+    .footer-note a {
+      color: #147a6c;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #b1d6cf;
+      padding-bottom: 0.1rem;
+      transition: border-color 0.2s;
+    }
+
+    .footer-note a:hover {
+      border-bottom-color: #147a6c;
+    }
+
+    .footer-note .small {
+      font-size: 0.8rem;
+      color: #4c7a72;
+      margin-top: 0.7rem;
+      opacity: 0.7;
+    }
+
+    /* 移动端微调 */
+    @media (max-width: 500px) {
+      .hero {
+        padding: 2rem 1.5rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .bg-note, .story, .faq-mini {
+        padding: 1.4rem 1.2rem;
+      }
+      .card {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- 首页横幅 hero -->
+    <section class="hero">
+      <h1>说球帝 · 索引</h1>
+      <p class="sub">一份围绕篮球与赛事资料的整理专题，从信息脉络出发，<strong>温和地进入深度内容</strong>。</p>
+    </section>
+
+    <!-- 背景说明 -->
+    <div class="bg-note">
+      <p><span class="accent">⚡ 资料背景</span> 说球帝最初作为内容聚合索引，逐步收录了比赛数据、战术简报、球员动态与历史专题。不追求即时爆点，而是将零散信息归拢成可翻阅的线索。这里的每一个条目都来自公开素材与长期关注，适合慢慢浏览。</p>
+    </div>
+
+    <!-- 网格卡片：特点/场景 -->
+    <div class="grid">
+      <div class="card">
+        <h3>整理方式</h3>
+        <p>按赛季、球队、主题分类，避免碎片化堆砌。每份资料都附有来源摘要与交叉参考，方便回溯原始信息。</p>
+        <span class="tag">结构索引</span>
+      </div>
+      <div class="card">
+        <h3>适用场景</h3>
+        <p>赛前快速回顾对手近况、赛后查阅技术统计、长草期翻阅历史专题。也适合写稿、做视频前的素材收集。</p>
+        <span class="tag">参考工具</span>
+      </div>
+      <div class="card">
+        <h3>内容边界</h3>
+        <p>以客观可查的信息为主，不包含个人预测、内幕传闻或诱导性分析。保持克制，只做信息整理。</p>
+        <span class="tag">真实可靠</span>
+      </div>
+    </div>
+
+    <!-- 三段自然介绍 (从资料整理和信息索引角度) -->
+    <div class="story">
+      <h2>从散落到有序</h2>
+      <p>篮球世界每秒钟都在产生新的记录、访谈和战术图解。面对海量内容，<span class="highlight">说球帝</span>更愿意做减法：把同一个主题下分散在各处的信息重新编排，用时间线、标签和简短注释串起来。比如一支球队的季中调整，可能涉及伤病报告、交易流言、教练采访和进阶数据——我们把这些线索放在同一页面，省去反复切换标签页的麻烦。</p>
+      <p>索引不是替代原出处，而是提供更清晰的入口。每一条整理都保留原始链接或引用标识，方便你自行验证深度查阅。如果你只是想快速了解某件事的来龙去脉，这里会比搜索引擎的第一屏结果更安静、更聚焦。</p>
+    </div>
+
+    <div class="story">
+      <h2>索引的日常使用</h2>
+      <p>不少朋友把这里的专题当作“比赛日备忘录”——赛前扫一眼对手的近期轮换、核心球员效率以及交锋记录。也有写作者在这里收集赛季脉络，把零散的事件串联成故事线。因为整理角度偏向中性，所以无论是主队球迷还是中立观察者，都能找到可用的部分。</p>
+      <p>目前覆盖的内容包括近五个赛季的季后赛对阵、主要球队的阵容变迁、以及部分经典系列赛的数据复盘。未来会慢慢补充选秀、夏季联赛和海外联赛的索引。如果你有长期关注的特定方向，也可以留意后续更新。</p>
+    </div>
+
+    <div class="story">
+      <h2>关于「说球帝」</h2>
+      <p>“说球帝”这个名字来自一群喜欢翻资料、聊逻辑的朋友。没有口号，不制造焦虑，只是觉得好内容应该被更好地组织起来。这个站点本身就是一个实验——在信息爆炸的年代，试着用整理来对抗遗忘和噪声。如果你也有同感，欢迎随时来翻阅：<a href="https://page-shuoqiudi.com">说球帝</a>。</p>
+      <p>不承诺“最全”或“最快”，但会努力做到清晰、可追溯、不误导。每一条更新都经过二次核对，避免断章取义。这很慢，但值得。</p>
+    </div>
+
+    <!-- FAQ 摘要 (轻量) -->
+    <div class="faq-mini">
+      <h3>📌 常见疑问</h3>
+      <div class="q-item"><strong>Q：</strong><span>资料多久更新一次？</span></div>
+      <div class="q-item"><strong>A：</strong><span>常规赛期间每周 1-2 次，休赛期视重要事件不定期补充。</span></div>
+      <div class="q-item" style="margin-top:0.4rem;"><strong>Q：</strong><span>可以转载索引内容吗？</span></div>
+      <div class="q-item"><strong>A：</strong><span>可以注明来源后引用片段，不建议全文复制，因为索引价值在于结构和上下文。</span></div>
+      <div class="q-item" style="margin-top:0.4rem;"><strong>Q：</strong><span>为什么没有赛前预测板块？</span></div>
+      <div class="q-item"><strong>A：</strong><span>保持资料索引的客观性，不做竞猜倾向类内容。</span></div>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <div class="footer-note">
+      <p>这里是一份持续生长的资料库，不赶时间，慢慢翻。</p>
+      <div class="link-wrap">
+        <a href="https://page-shuoqiudi.com">说球帝</a>
+      </div>
+      <p class="small">· 索引 · 整理 · 温和翻阅 ·</p>
+    </div>
+  </div>
+</body>
+</html>
